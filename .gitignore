@@ -1,0 +1,8 @@
+requirements.txt
+pyrightconfig.json
+
+venv
+
+*.sqlite3
+
+__pycache__
