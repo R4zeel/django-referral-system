@@ -1,6 +1,10 @@
+import time
+import sys
+
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from django.utils.crypto import get_random_string
 from django.db.utils import IntegrityError
 from rest_framework.authtoken.models import Token
@@ -37,6 +41,8 @@ class UserAuthViewSet(viewsets.ModelViewSet):
             ).update(
                 verification_code=verification_code
             )
+        sys.stdout.write('Отправка СМС кода...')
+        time.sleep(2)
         return Response(
             {
                 'verification_code': verification_code,
@@ -75,12 +81,13 @@ class UserAuthViewSet(viewsets.ModelViewSet):
 class ReferralViewSet(viewsets.ModelViewSet):
     queryset = PhoneUser.objects.all()
     serializer_class = ReferralSerializer
-    http_method_names = ['get', 'post']
+    http_method_names = ['post']
 
     @action(
         methods=['POST'],
         detail=False,
-        url_path='referral_code'
+        url_path='referral_code',
+        permission_classes=[IsAuthenticated]
     )
     def enter_referral_code(self, request):
         serializer = self.get_serializer(data=request.data)
