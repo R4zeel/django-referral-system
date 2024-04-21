@@ -3,7 +3,6 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.utils.crypto import get_random_string
 from django.db.utils import IntegrityError
-from django.db.models import Count
 from rest_framework.authtoken.models import Token
 
 from .serializers import (PhoneUserSerializer,

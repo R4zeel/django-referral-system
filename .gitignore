@@ -1,4 +1,3 @@
-requirements.txt
 pyrightconfig.json
 
 venv
@@ -6,3 +5,5 @@ venv
 *.sqlite3
 
 __pycache__
+
+.env

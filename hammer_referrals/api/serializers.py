@@ -49,12 +49,11 @@ class ReferralSerializer(serializers.Serializer):
             id=self.context['request'].user.id
         ).update(referred_by=validated_data['referrer'])
         return current_uesr
-    
+
     def to_representation(self, instance):
         return UserProfileSerializer(
             instance=PhoneUser.objects.get(id=self.context['request'].user.id)
         ).data
-        
 
 
 class PhoneUserSerializer(serializers.Serializer):
@@ -88,4 +87,3 @@ class PhoneVerificationSerializer(serializers.Serializer):
                 запросите новый'
             )
         return attrs
-

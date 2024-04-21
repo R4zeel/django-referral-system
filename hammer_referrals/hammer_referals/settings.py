@@ -1,12 +1,14 @@
+import os
+
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-q0(4+b+qs2ed+s588_!vu0)4&=qnm@se%9=niz@p*_=i@f+&2b'
+SECRET_KEY = os.getenv('SECRET_KEY', 'default-key')
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(' ')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -18,7 +20,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'phonenumber_field',
-    'django_bootstrap5',
     'api.apps.ApiConfig',
     'users.apps.UsersConfig',
 ]
